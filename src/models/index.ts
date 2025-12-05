@@ -8,6 +8,7 @@ import Professor from "../modules/professors/models/professorsModel.js";
 import Student from "../modules/students/models/studentsModel.js";
 import Classes from "../modules/classes/models/classesModel.js";
 import Exam from "../modules/exams/models/examsModel.js";
+import Enrollment from "../modules/enrollment/models/enrollmentModel.js";
 
 export {
   User,
@@ -20,4 +21,5 @@ export {
   Student,
   Classes,
   Exam,
+  Enrollment,
 };
