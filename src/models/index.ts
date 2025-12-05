@@ -3,5 +3,6 @@ import Session from "../modules/users/models/sessions.js";
 import Faculty from "../modules/faculties/models/facultiesModel.js";
 import Major from "../modules/majors/models/majorsModel.js";
 import Course from "../modules/courses/models/coursesModel.js";
+import MajorCourse from "../modules/courses/models/majorCoursesModel.js";
 
-export { User, Session, Faculty, Major, Course };
+export { User, Session, Faculty, Major, Course, MajorCourse };
