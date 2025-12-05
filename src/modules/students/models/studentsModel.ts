@@ -1,0 +1,63 @@
+import { Model, DataTypes } from "sequelize";
+import type { UUID } from "crypto";
+import sequelize from "../../../config/db.js";
+
+class Student extends Model {
+  declare studentId: UUID;
+  declare userId: UUID;
+  declare majorId: UUID;
+  declare gpa: number;
+  declare semester: string;
+}
+
+Student.init(
+  {
+    studentId: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      unique: true,
+      allowNull: false,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    userId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: "Users",
+        key: "userId",
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    },
+    majorId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: "Majors",
+        key: "majorId",
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    },
+    gpa: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    semester: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "Students",
+    timestamps: true,
+    paranoid: true,
+    indexes: [
+      { unique: true, fields: ["studentId"] },
+      { fields: ["majorId", "gpa"] },
+    ],
+    sequelize,
+  }
+);
+
+export default Student;

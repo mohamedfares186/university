@@ -5,5 +5,15 @@ import Major from "../modules/majors/models/majorsModel.js";
 import Course from "../modules/courses/models/coursesModel.js";
 import MajorCourse from "../modules/courses/models/majorCoursesModel.js";
 import Professor from "../modules/professors/models/professorsModel.js";
+import Student from "../modules/students/models/studentsModel.js";
 
-export { User, Session, Faculty, Major, Course, MajorCourse, Professor };
+export {
+  User,
+  Session,
+  Faculty,
+  Major,
+  Course,
+  MajorCourse,
+  Professor,
+  Student,
+};
