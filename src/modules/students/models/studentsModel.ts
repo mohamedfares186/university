@@ -1,6 +1,8 @@
 import { Model, DataTypes } from "sequelize";
 import type { UUID } from "crypto";
 import sequelize from "../../../config/db.js";
+import User from "../../users/models/users.js";
+import Major from "../../majors/models/majorsModel.js";
 
 class Student extends Model {
   declare studentId: UUID;
@@ -59,5 +61,11 @@ Student.init(
     sequelize,
   }
 );
+
+Student.belongsTo(User, { foreignKey: "userId" });
+User.hasMany(Student, { foreignKey: "userId" });
+
+Student.belongsTo(Major, { foreignKey: "majorId" });
+Major.hasOne(Student, { foreignKey: "majorId" });
 
 export default Student;
