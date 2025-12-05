@@ -57,6 +57,7 @@ class RefreshService {
       const jwtCredentials = {
         userId: user.userId,
         role: user.role,
+        isApproved: user.isApproved,
         isVerified: user.isVerified,
         isBanned: user.isBanned,
       };
