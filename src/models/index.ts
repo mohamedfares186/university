@@ -9,6 +9,7 @@ import Student from "../modules/students/models/studentsModel.js";
 import Classes from "../modules/classes/models/classesModel.js";
 import Exam from "../modules/exams/models/examsModel.js";
 import Enrollment from "../modules/enrollment/models/enrollmentModel.js";
+import Score from "../modules/scores/models/scoresModel.js";
 
 export {
   User,
@@ -22,4 +23,5 @@ export {
   Classes,
   Exam,
   Enrollment,
+  Score,
 };
