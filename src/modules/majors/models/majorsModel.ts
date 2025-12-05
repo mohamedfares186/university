@@ -1,6 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import type { UUID } from "crypto";
 import sequelize from "../../../config/db.js";
+import Faculty from "../../faculties/models/facultiesModel.js";
 
 class Major extends Model {
   declare majorId: UUID;
@@ -39,7 +40,7 @@ Major.init(
     },
   },
   {
-    tableName: "Majors",
+    tableName: "majors",
     timestamps: true,
     paranoid: true,
     indexes: [
@@ -49,5 +50,8 @@ Major.init(
     sequelize,
   }
 );
+
+Major.belongsTo(Faculty, { foreignKey: "facultyId" });
+Faculty.hasMany(Major, { foreignKey: "facultyId" });
 
 export default Major;

@@ -1,3 +1,4 @@
+import "dotenv/config";
 import AdminUser from "./initializeAdmin.js";
 import { logger } from "../middleware/logger.js";
 import sequelize, { connectDB, syncDB } from "../config/db.js";

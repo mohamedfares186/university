@@ -25,7 +25,7 @@ Student.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Users",
+        model: "users",
         key: "userId",
       },
       onDelete: "CASCADE",
@@ -35,7 +35,7 @@ Student.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Majors",
+        model: "majors",
         key: "majorId",
       },
       onDelete: "CASCADE",
@@ -51,7 +51,7 @@ Student.init(
     },
   },
   {
-    tableName: "Students",
+    tableName: "students",
     timestamps: true,
     paranoid: true,
     indexes: [
@@ -66,6 +66,6 @@ Student.belongsTo(User, { foreignKey: "userId" });
 User.hasMany(Student, { foreignKey: "userId" });
 
 Student.belongsTo(Major, { foreignKey: "majorId" });
-Major.hasOne(Student, { foreignKey: "majorId" });
+Major.hasMany(Student, { foreignKey: "majorId" });
 
 export default Student;

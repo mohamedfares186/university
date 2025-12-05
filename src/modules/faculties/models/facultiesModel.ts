@@ -28,7 +28,7 @@ Faculty.init(
     },
   },
   {
-    tableName: "Faculties",
+    tableName: "faculties",
     timestamps: true,
     paranoid: true,
     indexes: [{ unique: true, fields: ["facultyId"] }, { fields: ["title"] }],

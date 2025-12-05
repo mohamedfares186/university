@@ -1,6 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import type { UUID } from "crypto";
 import sequelize from "../../../config/db.js";
+import Course from "../../courses/models/coursesModel.js";
 
 class Exam extends Model {
   declare examId: UUID;
@@ -20,7 +21,7 @@ Exam.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Courses",
+        model: "courses",
         key: "courseId",
       },
       onDelete: "CASCADE",
@@ -28,12 +29,15 @@ Exam.init(
     },
   },
   {
-    tableName: "Exams",
+    tableName: "exams",
     timestamps: true,
     paranoid: true,
     indexes: [{ unique: true, fields: ["examId"] }, { fields: ["courseId"] }],
     sequelize,
   }
 );
+
+Exam.belongsTo(Course, { foreignKey: "courseId" });
+Course.hasMany(Exam, { foreignKey: "courseId" });
 
 export default Exam;

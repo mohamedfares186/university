@@ -23,7 +23,7 @@ Enrollment.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Students",
+        model: "students",
         key: "studentId",
       },
       onDelete: "CASCADE",
@@ -33,7 +33,7 @@ Enrollment.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Majors",
+        model: "majors",
         key: "majorId",
       },
       onDelete: "CASCADE",
@@ -41,7 +41,7 @@ Enrollment.init(
     },
   },
   {
-    tableName: "Enrollments",
+    tableName: "enrollments",
     timestamps: true,
     paranoid: true,
     indexes: [

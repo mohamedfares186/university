@@ -23,7 +23,7 @@ Session.init(
     userId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: { model: "Users", key: "userId" },
+      references: { model: "users", key: "userId" },
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
     },
@@ -43,7 +43,7 @@ Session.init(
     },
   },
   {
-    tableName: "Sessions",
+    tableName: "sessions",
     timestamps: true,
     paranoid: true,
     indexes: [{ unique: true, fields: ["token"] }, { fields: ["userId"] }],

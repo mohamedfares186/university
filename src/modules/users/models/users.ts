@@ -83,13 +83,20 @@ User.init(
       defaultValue: false,
     },
     role: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM(
+        "student",
+        "professor",
+        "teaching_assistant",
+        "moderator",
+        "admin",
+        "super_admin"
+      ),
       allowNull: false,
       defaultValue: "student",
     },
   },
   {
-    tableName: "Users",
+    tableName: "users",
     timestamps: true,
     paranoid: true,
     defaultScope: {

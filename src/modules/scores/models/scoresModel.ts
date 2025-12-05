@@ -25,7 +25,7 @@ Score.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Students",
+        model: "students",
         key: "studentId",
       },
       onDelete: "CASCADE",
@@ -35,14 +35,14 @@ Score.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Exams",
+        model: "exams",
         key: "examId",
       },
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
     },
     score: {
-      type: DataTypes.STRING,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     notes: {
@@ -51,7 +51,7 @@ Score.init(
     },
   },
   {
-    tableName: "Scores",
+    tableName: "scores",
     timestamps: true,
     paranoid: true,
     indexes: [{ fields: ["studentId", "examId", "score"] }],

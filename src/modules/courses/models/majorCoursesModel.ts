@@ -23,7 +23,7 @@ MajorCourse.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Majors",
+        model: "majors",
         key: "majorId",
       },
       onDelete: "CASCADE",
@@ -34,7 +34,7 @@ MajorCourse.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Courses",
+        model: "courses",
         key: "courseId",
       },
       onDelete: "CASCADE",
@@ -42,7 +42,7 @@ MajorCourse.init(
     },
   },
   {
-    tableName: "MajorCourses",
+    tableName: "major_courses",
     timestamps: true,
     paranoid: true,
     indexes: [{ unique: true, fields: ["majorId", "courseId"] }],

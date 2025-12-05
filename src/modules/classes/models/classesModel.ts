@@ -24,7 +24,7 @@ Classes.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Courses",
+        model: "courses",
         key: "courseId",
       },
       onDelete: "CASCADE",
@@ -44,7 +44,7 @@ Classes.init(
     },
   },
   {
-    tableName: "Classes",
+    tableName: "classes",
     timestamps: true,
     paranoid: true,
     indexes: [

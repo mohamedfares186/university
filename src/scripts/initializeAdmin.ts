@@ -132,15 +132,6 @@ class AdminUser {
       break;
     }
     while (true) {
-      dateOfBirth = await this.prompt(`Date of birth: `);
-      const validate = this.validateDate(dateOfBirth);
-      if (!validate) {
-        logger.error(`Invalid Date Format`);
-        continue;
-      }
-      break;
-    }
-    while (true) {
       phoneNumber = await this.prompt(`Phone Number: `);
       break;
     }
@@ -150,6 +141,15 @@ class AdminUser {
     }
     while (true) {
       gender = await this.prompt(`Gender: `);
+      break;
+    }
+    while (true) {
+      dateOfBirth = await this.prompt(`Date of birth: `);
+      const validate = this.validateDate(dateOfBirth);
+      if (!validate) {
+        logger.error(`Invalid Date Format`);
+        continue;
+      }
       break;
     }
     return {
@@ -168,7 +168,7 @@ class AdminUser {
   async SaveAdminCredentials(credentials: AdminUserCredentials) {
     logger.info(`Saving admin credentials...`);
 
-    const superAdmin = "superAdmin";
+    const superAdmin = "super_admin";
 
     const userId = uuidv4();
 
@@ -182,10 +182,10 @@ class AdminUser {
       username: credentials.username,
       password: passwordHash,
       role: superAdmin,
-      dateOfBirth: credentials.dateOfBirth as Date,
       address: credentials.address,
       phoneNumber: credentials.phoneNumber,
       gender: credentials.gender,
+      dateOfBirth: credentials.dateOfBirth as Date,
       isVerified: true,
       isBanned: false,
       isApproved: true,
@@ -204,10 +204,10 @@ class AdminUser {
         email,
         username,
         password,
-        dateOfBirth,
         phoneNumber,
         address,
         gender,
+        dateOfBirth,
       } = await this.AdminCredentials();
       return await this.SaveAdminCredentials({
         firstName,

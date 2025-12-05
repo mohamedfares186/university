@@ -24,7 +24,7 @@ Professor.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Users",
+        model: "users",
         key: "userId",
       },
       onDelete: "CASCADE",
@@ -34,7 +34,7 @@ Professor.init(
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Courses",
+        model: "courses",
         key: "courseId",
       },
       onDelete: "CASCADE",
@@ -46,7 +46,7 @@ Professor.init(
     },
   },
   {
-    tableName: "Professors",
+    tableName: "professors",
     timestamps: true,
     paranoid: true,
     indexes: [{ unique: true, fields: ["professorId"] }, { fields: ["title"] }],

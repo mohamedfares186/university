@@ -27,7 +27,7 @@ Course.init(
     },
   },
   {
-    tableName: "Courses",
+    tableName: "courses",
     timestamps: true,
     paranoid: true,
     indexes: [{ unique: true, fields: ["courseId"] }, { fields: ["title"] }],
