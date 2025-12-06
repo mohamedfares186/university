@@ -198,6 +198,18 @@ class AdminUser {
 
   async Run() {
     try {
+      try {
+        const superAdmin = await User.findOne({
+          where: { role: "super_admin" },
+        });
+        if (superAdmin) {
+          logger.error("Super admin has been already initialized");
+          process.exit(-1);
+        }
+      } catch (error) {
+        logger.error(`Error fetching super admin data - ${error}`);
+      }
+
       const {
         firstName,
         lastName,
