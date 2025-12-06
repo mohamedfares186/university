@@ -54,6 +54,7 @@ Student.init(
     tableName: "students",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     indexes: [
       { unique: true, fields: ["studentId"] },
       { fields: ["majorId", "gpa"] },
