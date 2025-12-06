@@ -54,6 +54,7 @@ Score.init(
     tableName: "scores",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     indexes: [{ fields: ["studentId", "examId", "score"] }],
     sequelize,
   }
