@@ -43,6 +43,7 @@ Major.init(
     tableName: "majors",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     indexes: [
       { unique: true, fields: ["majorId"] },
       { fields: ["facultyId", "title"] },

@@ -31,6 +31,7 @@ Faculty.init(
     tableName: "faculties",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     indexes: [{ unique: true, fields: ["facultyId"] }, { fields: ["title"] }],
     sequelize,
   }

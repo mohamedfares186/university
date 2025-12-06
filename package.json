@@ -11,7 +11,7 @@
     "lint": "eslint src/**/*",
     "test": "jest",
     "type": "tsc --noEmit",
-    "migrate": "sequelize db:migrate:all"
+    "migrate": "sequelize db:migrate"
   },
   "repository": {
     "type": "git",
