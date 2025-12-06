@@ -44,6 +44,7 @@ Enrollment.init(
     tableName: "enrollments",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     indexes: [
       { unique: true, fields: ["enrollmentId"] },
       { fields: ["studentId"] },
