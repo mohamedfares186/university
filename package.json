@@ -7,8 +7,8 @@
     "setup": "node dist/scripts/setup.js",
     "start": "node dist/main.js",
     "dev": "tsx watch src/main.ts",
-    "setup:dev": "tsx src/scripts/setup.ts",
-    "lint": "eslint .",
+    "setup-dev": "tsx src/scripts/setup.ts",
+    "lint": "eslint src/**/*",
     "test": "jest",
     "type": "tsc --noEmit"
   },
@@ -51,6 +51,7 @@
     "globals": "^16.5.0",
     "jest": "^30.2.0",
     "jiti": "^2.6.1",
+    "sequelize-cli": "^6.6.3",
     "supertest": "^7.1.4",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",

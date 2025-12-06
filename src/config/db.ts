@@ -29,13 +29,4 @@ export const connectDB = async () => {
   }
 };
 
-export const syncDB = async () => {
-  try {
-    await sequelize.sync({ alter: true });
-    logger.info(`Database has been synced successfully`);
-  } catch (error) {
-    logger.error(`Error syncing database - ${error}`);
-  }
-};
-
 export default sequelize;
