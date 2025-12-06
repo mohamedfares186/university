@@ -49,6 +49,7 @@ Professor.init(
     tableName: "professors",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     indexes: [{ unique: true, fields: ["professorId"] }, { fields: ["title"] }],
     sequelize,
   }

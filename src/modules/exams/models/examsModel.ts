@@ -32,6 +32,7 @@ Exam.init(
     tableName: "exams",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     indexes: [{ unique: true, fields: ["examId"] }, { fields: ["courseId"] }],
     sequelize,
   }

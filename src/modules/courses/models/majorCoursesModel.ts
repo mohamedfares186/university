@@ -45,6 +45,7 @@ MajorCourse.init(
     tableName: "major_courses",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     indexes: [{ unique: true, fields: ["majorId", "courseId"] }],
     sequelize,
   }

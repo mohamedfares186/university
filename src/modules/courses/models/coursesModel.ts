@@ -30,6 +30,7 @@ Course.init(
     tableName: "courses",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     indexes: [{ unique: true, fields: ["courseId"] }, { fields: ["title"] }],
     sequelize,
   }

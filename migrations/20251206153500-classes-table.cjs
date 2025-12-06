@@ -3,20 +3,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("majors", {
-      major_id: {
+    await queryInterface.createTable("classes", {
+      class_id: {
         type: Sequelize.UUID,
+        primaryKey: true,
         unique: true,
         allowNull: false,
-        primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
       },
-      faculty_id: {
+      course_id: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: "faculties",
-          key: "faculty_id",
+          model: "courses",
+          key: "course_id",
         },
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
@@ -24,10 +24,13 @@ module.exports = {
       title: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
       description: {
         type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      date: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
       created_at: {
@@ -44,10 +47,10 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.addIndex("majors", ["title"]);
+    await queryInterface.addIndex("classes", ["title", "date"]);
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("majors");
+    await queryInterface.dropTable("classes");
   },
 };

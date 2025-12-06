@@ -4,14 +4,14 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("professors", {
-      professorId: {
+      professorI_id: {
         type: Sequelize.UUID,
         primaryKey: true,
         unique: true,
         allowNull: false,
         defaultValue: Sequelize.UUIDV4,
       },
-      userId: {
+      user_id: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
@@ -21,7 +21,7 @@ module.exports = {
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
-      courseId: {
+      course_id: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {

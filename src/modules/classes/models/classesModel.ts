@@ -47,6 +47,7 @@ Classes.init(
     tableName: "classes",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     indexes: [
       { unique: true, fields: ["classId"] },
       { fields: ["title", "date"] },
