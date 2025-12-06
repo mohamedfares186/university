@@ -10,7 +10,8 @@
     "setup-dev": "tsx src/scripts/setup.ts",
     "lint": "eslint src/**/*",
     "test": "jest",
-    "type": "tsc --noEmit"
+    "type": "tsc --noEmit",
+    "migrate": "sequelize-cli db:migrate"
   },
   "repository": {
     "type": "git",

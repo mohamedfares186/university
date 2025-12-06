@@ -15,9 +15,9 @@ Session.init(
   {
     sessionId: {
       type: DataTypes.UUID,
-      allowNull: false,
-      unique: true,
       primaryKey: true,
+      unique: true,
+      allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
     userId: {
@@ -46,6 +46,7 @@ Session.init(
     tableName: "sessions",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     indexes: [{ unique: true, fields: ["token"] }, { fields: ["userId"] }],
     sequelize,
   }

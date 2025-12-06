@@ -23,9 +23,9 @@ User.init(
   {
     userId: {
       type: DataTypes.UUID,
-      allowNull: false,
-      unique: true,
       primaryKey: true,
+      unique: true,
+      allowNull: false,
       defaultValue: DataTypes.UUIDV4,
     },
     firstName: {
@@ -99,6 +99,7 @@ User.init(
     tableName: "users",
     timestamps: true,
     paranoid: true,
+    underscored: true,
     defaultScope: {
       attributes: { exclude: ["password"] },
     },
