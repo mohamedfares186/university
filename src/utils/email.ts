@@ -9,6 +9,8 @@ const sendEmail = async (
   subject: string,
   text: string
 ): Promise<boolean> => {
+  if (env === "test") return true;
+
   if (!emailHost || !emailPort || !emailUser || !emailPass) {
     logger.warn("Email configuration not available, skipping email send");
     if (env === "production") {

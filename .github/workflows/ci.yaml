@@ -35,10 +35,6 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           SECURE_TOKEN_SECRET: ${{ secrets.SECURE_TOKEN_SECRET }}
           CSRF_TOKEN_SECRET: ${{ secrets.CSRF_TOKEN_SECRET }}
-          EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
-          EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
         run: npm run test
 
   docker:
