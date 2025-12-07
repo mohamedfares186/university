@@ -61,7 +61,7 @@ const requestLogger = (
   next: NextFunction
 ) => {
   extractUserFromToken(req);
-  const { method, url, hostname, ip } = req;
+  const { method, url, hostname, ip, body } = req;
   const userId: UUIDTypes | string = req.user?.userId || "Anonymous";
   const role: string = req.user?.role || "Guest";
   const isVerified: boolean = req.user?.isVerified;
@@ -80,6 +80,7 @@ const requestLogger = (
       statusCode,
       hostname,
       url,
+      body,
       userId,
       role,
       isVerified,

@@ -1,18 +1,20 @@
 "use strict";
 
+const { DataTypes } = require("sequelize");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("sessions", {
       session_id: {
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
         primaryKey: true,
         unique: true,
         allowNull: false,
-        defaultValue: Sequelize.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
       },
       user_id: {
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
         allowNull: true,
         references: {
           model: "users",
@@ -22,30 +24,30 @@ module.exports = {
         onUpdate: "CASCADE",
       },
       token: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       expires_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       is_revoked: {
-        type: Sequelize.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
       },
       created_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: DataTypes.NOW,
       },
       updated_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: DataTypes.NOW,
       },
       deleted_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
       },
     });
     await queryInterface.addIndex("sessions", ["token"]);

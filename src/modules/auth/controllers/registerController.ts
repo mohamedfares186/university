@@ -78,11 +78,12 @@ class RegisterController {
         role: result.user.role,
         isVerified: result.user.isVerified,
         isBanned: result.user.isBanned,
+        isApproved: result.user.isApproved,
       };
 
       const accessToken = Tokens.access(jwtCredenetials as JWTCredentials);
       const refreshToken = Tokens.refresh(result.user.userId as string);
-      const csrfToken = generateCsrfToken(jwtCredenetials as JWTCredentials);
+      const csrfToken = generateCsrfToken(jwtCredenetials);
 
       try {
         const sessionId = uuidv4();

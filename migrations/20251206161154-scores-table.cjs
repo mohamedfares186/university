@@ -1,18 +1,20 @@
 "use strict";
 
+const { DataTypes } = require("sequelize");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("scores", {
       score_id: {
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
         primaryKey: true,
         unique: true,
         allowNull: false,
-        defaultValue: Sequelize.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
       },
       student_id: {
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
           model: "students",
@@ -22,7 +24,7 @@ module.exports = {
         onUpdate: "CASCADE",
       },
       exam_id: {
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
           model: "exams",
@@ -32,25 +34,25 @@ module.exports = {
         onUpdate: "CASCADE",
       },
       score: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: false,
       },
       notes: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         allowNull: true,
       },
       created_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: DataTypes.NOW,
       },
       updated_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: DataTypes.NOW,
       },
       deleted_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
       },
     });
     await queryInterface.addIndex("scores", ["score"]);

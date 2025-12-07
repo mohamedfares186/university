@@ -33,11 +33,12 @@ class LoginController {
         role: result.user.role,
         isVerified: result.user.isVerified,
         isBanned: result.user.isBanned,
+        isApproved: result.user.isApproved,
       };
 
       const accessToken = Tokens.access(jwtCredenetials as JWTCredentials);
       const refreshToken = Tokens.refresh(result.user.userId as string);
-      const csrfToken = generateCsrfToken(jwtCredenetials as JWTCredentials);
+      const csrfToken = generateCsrfToken(jwtCredenetials);
 
       const sessionId = uuidv4();
       const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
