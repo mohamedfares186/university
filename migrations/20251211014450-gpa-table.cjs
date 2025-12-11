@@ -23,16 +23,6 @@ module.exports = {
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
-      semester_id: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        references: {
-          model: "semesters",
-          key: "semester_id",
-        },
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
-      },
       gpa: {
         type: DataTypes.FLOAT,
         allowNull: true,
