@@ -19,6 +19,7 @@ import Student from "../modules/students/models/studentsModel.js";
 // Fourth level (depend on third level)
 import Enrollment from "../modules/enrollment/models/enrollmentModel.js";
 import Score from "../modules/scores/models/scoresModel.js";
+import Attendance from "../modules/attendance/models/attendanceModel.js";
 
 export {
   User,
@@ -35,4 +36,5 @@ export {
   Student,
   Enrollment,
   Score,
+  Attendance,
 };
