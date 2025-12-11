@@ -66,6 +66,7 @@ User.init(
     phoneNumber: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     isVerified: {
       type: DataTypes.BOOLEAN,

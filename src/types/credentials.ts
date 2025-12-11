@@ -62,3 +62,19 @@ export interface JWTCredentials {
   isBanned: boolean;
   isApproved: boolean;
 }
+
+export interface CreateUserCredentials {
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  password: string;
+  dateOfBirth: Date;
+  phoneNumber: string;
+  gender: string;
+  address: string;
+  role: string;
+  isVerified: boolean;
+  isApproved: boolean;
+  isBanned: boolean;
+}
