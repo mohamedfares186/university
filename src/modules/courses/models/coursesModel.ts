@@ -6,6 +6,7 @@ class Course extends Model {
   declare courseId: UUID;
   declare title: string;
   declare description: string;
+  declare creditHours: number;
 }
 
 Course.init(
@@ -23,6 +24,10 @@ Course.init(
     },
     description: {
       type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    creditHours: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },
