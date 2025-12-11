@@ -5,30 +5,37 @@ const { DataTypes } = require("sequelize");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("semesters", {
-      semester_id: {
+    await queryInterface.createTable("gpa", {
+      gpa_id: {
         type: DataTypes.UUID,
         primaryKey: true,
         unique: true,
         allowNull: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      title: {
-        type: DataTypes.STRING,
+      student_id: {
+        type: DataTypes.UUID,
         allowNull: false,
+        references: {
+          model: "students",
+          key: "student_id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
-      starts_at: {
-        type: DataTypes.DATE,
+      semester_id: {
+        type: DataTypes.UUID,
         allowNull: false,
+        references: {
+          model: "semesters",
+          key: "semester_id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
-      ends_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      is_active: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
+      gpa: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
       },
       created_at: {
         type: DataTypes.DATE,
@@ -44,10 +51,10 @@ module.exports = {
         type: DataTypes.DATE,
       },
     });
-    await queryInterface.addIndex("semesters", ["title"]);
+    await queryInterface.addIndex("gpa", ["gpa"]);
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("semesters");
+    await queryInterface.dropTable("gpa");
   },
 };
