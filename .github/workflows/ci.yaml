@@ -9,6 +9,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: ${{ secrets.NODE_ENV }}
+      PORT: ${{ secrets.PORT }}
+      FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      SECURE_TOKEN_SECRET: ${{ secrets.SECURE_TOKEN_SECRET }}
+      CSRF_TOKEN_SECRET: ${{ secrets.CSRF_TOKEN_SECRET }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
@@ -28,13 +35,6 @@ jobs:
         run: npm run lint
 
       - name: Run test
-        env:
-          NODE_ENV: ${{ secrets.NODE_ENV }}
-          PORT: ${{ secrets.PORT }}
-          FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          SECURE_TOKEN_SECRET: ${{ secrets.SECURE_TOKEN_SECRET }}
-          CSRF_TOKEN_SECRET: ${{ secrets.CSRF_TOKEN_SECRET }}
         run: npm run test
 
   docker:
