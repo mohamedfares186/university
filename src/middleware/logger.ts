@@ -2,7 +2,6 @@ import type { NextFunction } from "express";
 import { createLogger, format, transports } from "winston";
 import type { UserRequest, UserResponse } from "../types/request.js";
 import type { UUIDTypes } from "uuid";
-import { extractUserFromToken } from "./isAuthenticated.js";
 
 const { combine, timestamp, json, colorize, printf } = format;
 
@@ -60,7 +59,6 @@ const requestLogger = (
   res: UserResponse,
   next: NextFunction
 ) => {
-  extractUserFromToken(req);
   const { method, url, hostname, ip, body } = req;
   const userId: UUIDTypes | string = req.user?.userId || "Anonymous";
   const role: string = req.user?.role || "Guest";
@@ -84,8 +82,8 @@ const requestLogger = (
       userId,
       role,
       isVerified,
-      isBanned,
       isApproved,
+      isBanned,
       userAgent: req.get("User-Agent") || "Unknown",
       duration,
       ip,

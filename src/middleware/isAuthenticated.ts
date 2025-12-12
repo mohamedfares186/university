@@ -40,20 +40,4 @@ const authenticate = (req: UserRequest, res: Response, next: NextFunction) => {
   }
 };
 
-export const extractUserFromToken = (req: UserRequest) => {
-  try {
-    const token = extractTokenFromRequest(req);
-
-    if (token) {
-      const decoded = jwt.verify(token, jwtSecret as string);
-      return (req.user = decoded as JwtPayload);
-    }
-
-    return null;
-  } catch (error) {
-    logger.error(`Error extracting user from token - ${error}`);
-    return null;
-  }
-};
-
 export default authenticate;

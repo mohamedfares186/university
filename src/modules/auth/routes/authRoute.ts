@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, type RequestHandler } from "express";
 // import type { RequestHandler } from "express";
 import RegisterController from "../controllers/registerController.js";
 import LoginController from "../controllers/loginController.js";
@@ -18,6 +18,7 @@ import {
 } from "../validation/passwordValidation.js";
 // import requestLogger from "../../../middleware/logger.js";
 import { authLimiter } from "../../../middleware/limiter..js";
+import requestLogger from "../../../middleware/logger.js";
 
 const router = Router();
 
@@ -28,12 +29,14 @@ router.post(
   "/register",
   authLimiter,
   registerValidation,
+  requestLogger as RequestHandler,
   new RegisterController().register
 );
 router.post(
   "/login",
   authLimiter,
   loginValidation,
+  requestLogger as RequestHandler,
   new LoginController().login
 );
 router.post(
@@ -41,6 +44,7 @@ router.post(
   authLimiter,
   logoutValidation,
   authenticate,
+  requestLogger as RequestHandler,
   new LogoutController().logout
 );
 router.post(
@@ -48,6 +52,7 @@ router.post(
   authLimiter,
   refreshValidation,
   authenticate,
+  requestLogger as RequestHandler,
   new RefreshController().refresh
 );
 router.post("/email/resend", authLimiter, authenticate, email.resend);
@@ -55,18 +60,21 @@ router.post(
   "/email/verify/:token",
   authLimiter,
   emailVerificationValidation,
+  requestLogger as RequestHandler,
   email.verify
 );
 router.post(
   "/password/forget",
   authLimiter,
   forgetPasswordValidation,
+  requestLogger as RequestHandler,
   password.forget
 );
 router.post(
   "/password/reset/:token",
   authLimiter,
   resetPasswordValidation,
+  requestLogger as RequestHandler,
   password.reset
 );
 
