@@ -7,6 +7,7 @@ import requestLogger from "../../../middleware/logger.js";
 import GetUserController from "../controllers/getUserController.js";
 import GetAllUsersController from "../controllers/getAllUsersController.js";
 import ApproveUserController from "../controllers/approveUserController.js";
+import BanUserController from "../controllers/banUserController.js";
 
 const router = Router();
 
@@ -38,12 +39,21 @@ router.get(
 );
 
 router.post(
-  "/admin/user-approve",
+  "/admin/approve-user",
   authenticate,
   validateCsrfToken,
   authorize("super_admin", "admin"),
   requestLogger as RequestHandler,
   new ApproveUserController().approveUser
+);
+
+router.post(
+  "/admin/ban-user",
+  authenticate,
+  validateCsrfToken,
+  authorize("super_admin", "admin"),
+  requestLogger as RequestHandler,
+  new BanUserController().banUser
 );
 
 export default router;
