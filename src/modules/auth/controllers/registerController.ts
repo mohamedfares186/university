@@ -113,7 +113,6 @@ class RegisterController {
         sameSite: "strict",
         maxAge: 1000 * 60 * 60,
       });
-
       res.cookie("refresh-token", refreshToken, {
         httpOnly: true,
         secure: env === "production",
@@ -126,6 +125,7 @@ class RegisterController {
         sameSite: "strict",
         maxAge: 1000 * 60 * 60,
       });
+      res.header("x-csrf-token", csrfToken);
 
       return res.status(201).json({
         success: true,

@@ -70,6 +70,7 @@ class LoginController {
         sameSite: "strict",
         maxAge: 1000 * 60 * 60,
       });
+      res.header("x-csrf-token", csrfToken);
 
       return res.status(200).json({
         success: true,

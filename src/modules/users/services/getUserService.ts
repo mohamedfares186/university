@@ -1,11 +1,10 @@
 import { logger } from "../../../middleware/logger.js";
-import type { UserCredentials } from "../../../types/credentials.js";
 import User from "../models/users.js";
 
 interface GetUserResult {
   success: boolean;
   message: string;
-  user?: UserCredentials;
+  user?: User;
 }
 
 class GetUserService {
