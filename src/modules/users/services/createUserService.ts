@@ -3,8 +3,9 @@ import type { CreateUserCredentials } from "../../../types/credentials.js";
 import User from "../models/users.js";
 import { v4 as uuidv4 } from "uuid";
 import { logger } from "../../../middleware/logger.js";
+import bcrypt from "bcryptjs";
 
-interface CreateUserResult {
+export interface CreateUserResult {
   success: boolean;
   message: string;
 }
@@ -28,26 +29,6 @@ class CreateUserSerivce {
         isBanned,
       } = userCredentials;
 
-      if (
-        !firstName ||
-        !lastName ||
-        !email ||
-        !username ||
-        !password ||
-        !phoneNumber ||
-        !address ||
-        !gender ||
-        !dateOfBirth ||
-        !role ||
-        !isVerified ||
-        !isApproved ||
-        !isBanned
-      )
-        return {
-          success: false,
-          message: "All fields are required.",
-        } as CreateUserResult;
-
       const findUser = await User.findOne({
         where: {
           [Op.or]: [{ email }, { username }, { phoneNumber }],
@@ -61,6 +42,7 @@ class CreateUserSerivce {
         } as CreateUserResult;
 
       const userId = uuidv4();
+      const passwordHash = await bcrypt.hash(password, 12);
 
       const newUser = await User.create({
         userId,
@@ -68,11 +50,12 @@ class CreateUserSerivce {
         lastName,
         email,
         username,
-        password,
+        password: passwordHash,
         phoneNumber,
         address,
         gender,
         dateOfBirth,
+        role,
         isVerified,
         isApproved,
         isBanned,
@@ -89,7 +72,7 @@ class CreateUserSerivce {
         message: "User has been created successfully.",
       } as CreateUserResult;
     } catch (error) {
-      logger.error(`Error creating new user - ${error}`);
+      logger.error(`Error creating new user service - ${error}`);
       return {
         success: false,
         message: "Error creating new user.",

@@ -10,6 +10,7 @@ import requestLogger from "./middleware/logger.js";
 import error from "./middleware/error.js";
 
 import authRoute from "./modules/auth/routes/authRoute.js";
+import usersRoute from "./modules/users/routes/usersRoute.js";
 import limiter from "./middleware/limiter..js";
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(requestLogger as RequestHandler);
 app.use(limiter as RequestHandler);
 
 app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/users", usersRoute);
 
 app.use(error as ErrorRequestHandler);
 

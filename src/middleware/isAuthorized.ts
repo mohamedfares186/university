@@ -3,7 +3,7 @@ import type { UserRequest } from "../types/request.js";
 import { logger } from "./logger.js";
 
 const authorize =
-  (...allowedRoles: number[]) =>
+  (...allowedRoles: string[]) =>
   (req: UserRequest, res: Response, next: NextFunction) => {
     try {
       const user = req.user;
