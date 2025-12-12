@@ -11,7 +11,9 @@ export interface CreateUserResult {
 }
 
 class CreateUserSerivce {
-  async createUser(userCredentials: CreateUserCredentials) {
+  async createUser(
+    userCredentials: CreateUserCredentials
+  ): Promise<CreateUserResult> {
     try {
       const {
         firstName,
@@ -39,7 +41,7 @@ class CreateUserSerivce {
         return {
           success: false,
           message: "User already exists.",
-        } as CreateUserResult;
+        };
 
       const userId = uuidv4();
       const passwordHash = await bcrypt.hash(password, 12);
@@ -65,18 +67,18 @@ class CreateUserSerivce {
         return {
           success: false,
           message: "Something went wrong. Please try again later.",
-        } as CreateUserResult;
+        };
 
       return {
         success: true,
         message: "User has been created successfully.",
-      } as CreateUserResult;
+      };
     } catch (error) {
       logger.error(`Error creating new user service - ${error}`);
       return {
         success: false,
         message: "Error creating new user.",
-      } as CreateUserResult;
+      };
     }
   }
 }
