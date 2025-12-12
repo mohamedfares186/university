@@ -10,6 +10,9 @@ class Student extends Model {
   declare majorId: UUID;
   declare gpa: number;
   declare semester: string;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 Student.init(

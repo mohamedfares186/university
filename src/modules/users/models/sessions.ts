@@ -9,6 +9,9 @@ class Session extends Model {
   declare token: string;
   declare expiresAt: Date;
   declare isRevoked: boolean;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 Session.init(

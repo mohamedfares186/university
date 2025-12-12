@@ -8,6 +8,9 @@ class Semester extends Model {
   declare startsAt: Date;
   declare endsAt: Date;
   declare isActive: boolean;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 Semester.init(

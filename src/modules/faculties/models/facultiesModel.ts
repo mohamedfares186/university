@@ -6,6 +6,9 @@ class Faculty extends Model {
   declare facultyId: UUID;
   declare title: string;
   declare description: string;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 Faculty.init(

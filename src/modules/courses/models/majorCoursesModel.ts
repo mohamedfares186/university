@@ -8,6 +8,9 @@ class MajorCourse extends Model {
   declare majorCourseId: UUID;
   declare majorId: UUID;
   declare courseId: UUID;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 MajorCourse.init(

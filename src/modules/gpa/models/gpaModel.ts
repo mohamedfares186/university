@@ -8,6 +8,9 @@ class GPA extends Model {
   declare studentId: UUID;
   declare semesterId: UUID;
   declare gpa: number;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 GPA.init(

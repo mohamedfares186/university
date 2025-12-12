@@ -8,6 +8,9 @@ class Enrollment extends Model {
   declare enrollmentId: UUID;
   declare studentId: UUID;
   declare majorId: UUID;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 Enrollment.init(

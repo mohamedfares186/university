@@ -7,6 +7,9 @@ class Course extends Model {
   declare title: string;
   declare description: string;
   declare creditHours: number;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 Course.init(

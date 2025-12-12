@@ -10,6 +10,9 @@ class Attendance extends Model {
   declare classId: UUID;
   declare date: Date;
   declare status: string;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 Attendance.init(

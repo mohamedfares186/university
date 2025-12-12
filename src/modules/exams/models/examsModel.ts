@@ -6,6 +6,9 @@ import Course from "../../courses/models/coursesModel.js";
 class Exam extends Model {
   declare examId: UUID;
   declare courseId: UUID;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 Exam.init(

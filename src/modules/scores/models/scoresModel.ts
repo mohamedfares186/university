@@ -10,6 +10,9 @@ class Score extends Model {
   declare examId: UUID;
   declare score: number;
   declare notes: string;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 Score.init(

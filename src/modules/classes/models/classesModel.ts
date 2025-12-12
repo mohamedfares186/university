@@ -9,6 +9,9 @@ class Classes extends Model {
   declare title: string;
   declare description: string;
   declare date: Date;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 Classes.init(

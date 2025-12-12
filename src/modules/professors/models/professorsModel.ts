@@ -9,6 +9,9 @@ class Professor extends Model {
   declare userId: UUID;
   declare courseId: UUID;
   declare title: string;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 Professor.init(
