@@ -26,7 +26,7 @@ class GetUserService {
 
       return {
         success: true,
-        message: "User Found.",
+        message: "User found.",
         user: findUser,
       };
     } catch (error) {
