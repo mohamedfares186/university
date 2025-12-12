@@ -4,6 +4,7 @@ import authenticate from "../../../middleware/isAuthenticated.js";
 import { validateCsrfToken } from "../../../middleware/csrf.js";
 import authorize from "../../../middleware/isAuthorized.js";
 import requestLogger from "../../../middleware/logger.js";
+import GetUserController from "../controllers/getUserController.js";
 
 const router = Router();
 
@@ -14,6 +15,15 @@ router.post(
   authorize("super_admin", "admin"),
   requestLogger as RequestHandler,
   new CreateuserController().createUser
+);
+
+router.post(
+  "/admin/get-user",
+  authenticate,
+  validateCsrfToken,
+  authorize("super_admin", "admin"),
+  requestLogger as RequestHandler,
+  new GetUserController().getUser
 );
 
 export default router;

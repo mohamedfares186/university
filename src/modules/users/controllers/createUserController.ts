@@ -8,7 +8,7 @@ class CreateuserController {
     this.user = user;
   }
 
-  createUser = async (req: UserRequest, res: Response) => {
+  createUser = async (req: UserRequest, res: Response): Promise<Response> => {
     try {
       const {
         firstName,
