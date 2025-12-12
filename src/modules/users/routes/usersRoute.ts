@@ -9,11 +9,14 @@ import GetAllUsersController from "../controllers/getAllUsersController.js";
 import ApproveUserController from "../controllers/approveUserController.js";
 import BanUserController from "../controllers/banUserController.js";
 import DeleteUserController from "../controllers/deleteUserController.js";
+import createUserValidation from "../validation/createUserValidation.js";
+import userSearchValidation from "../validation/userSearchValidation.js";
 
 const router = Router();
 
 router.post(
   "/admin/create-user",
+  createUserValidation,
   authenticate,
   validateCsrfToken,
   authorize("super_admin", "admin"),
@@ -23,6 +26,7 @@ router.post(
 
 router.post(
   "/admin/get-user",
+  userSearchValidation,
   authenticate,
   validateCsrfToken,
   authorize("super_admin", "admin"),
@@ -41,6 +45,7 @@ router.get(
 
 router.post(
   "/admin/approve-user",
+  userSearchValidation,
   authenticate,
   validateCsrfToken,
   authorize("super_admin", "admin"),
@@ -50,6 +55,7 @@ router.post(
 
 router.post(
   "/admin/ban-user",
+  userSearchValidation,
   authenticate,
   validateCsrfToken,
   authorize("super_admin", "admin"),
@@ -59,6 +65,7 @@ router.post(
 
 router.post(
   "/admin/delete-user",
+  userSearchValidation,
   authenticate,
   validateCsrfToken,
   authorize("super_admin"),
