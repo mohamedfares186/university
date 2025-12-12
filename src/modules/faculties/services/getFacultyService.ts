@@ -12,6 +12,9 @@ class GetFacultyService {
     try {
       const result = await Faculty.findOne({
         where: { title },
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "deletedAt"],
+        },
       });
       if (!result)
         return {
