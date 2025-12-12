@@ -8,6 +8,7 @@ import GetUserController from "../controllers/getUserController.js";
 import GetAllUsersController from "../controllers/getAllUsersController.js";
 import ApproveUserController from "../controllers/approveUserController.js";
 import BanUserController from "../controllers/banUserController.js";
+import DeleteUserController from "../controllers/deleteUserController.js";
 
 const router = Router();
 
@@ -54,6 +55,15 @@ router.post(
   authorize("super_admin", "admin"),
   requestLogger as RequestHandler,
   new BanUserController().banUser
+);
+
+router.post(
+  "/admin/delete-user",
+  authenticate,
+  validateCsrfToken,
+  authorize("super_admin"),
+  requestLogger as RequestHandler,
+  new DeleteUserController().deleteUser
 );
 
 export default router;

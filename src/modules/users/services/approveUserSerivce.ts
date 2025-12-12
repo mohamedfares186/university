@@ -31,6 +31,7 @@ class ApproveUserService {
         };
 
       result.isApproved = true;
+      result.updatedAt = Date.now();
       const saveResult = await result.save();
       if (!saveResult)
         return {

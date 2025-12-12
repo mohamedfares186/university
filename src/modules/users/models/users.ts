@@ -17,6 +17,9 @@ class User extends Model {
   declare isVerified: boolean;
   declare isBanned: boolean;
   declare isApproved: boolean;
+  declare createdAt: number;
+  declare updatedAt: number;
+  declare deletedAt: number;
 }
 
 User.init(

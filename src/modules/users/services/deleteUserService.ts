@@ -1,14 +1,14 @@
 import { logger } from "../../../middleware/logger.js";
 import User from "../models/users.js";
 
-interface BanUserResult {
+interface DeleteUserResult {
   success: boolean;
   message: string;
   user?: User;
 }
 
-class BanUserService {
-  async baneUser(username: string): Promise<BanUserResult> {
+class DeleteUserService {
+  async deleteUser(username: string): Promise<DeleteUserResult> {
     try {
       if (!username)
         return {
@@ -16,7 +16,10 @@ class BanUserService {
           message: "Username is required.",
         };
 
-      const result = await User.findOne({ where: { username } });
+      const result = await User.findOne({
+        where: { username },
+        paranoid: false,
+      });
       if (!result)
         return {
           success: false,
@@ -26,31 +29,30 @@ class BanUserService {
       if (result.role === "super_admin")
         return {
           success: false,
-          message: "Super admin can't be banned.",
+          message: "Super admin can't be deleted.",
         };
 
-      if (result.isBanned === true)
+      if (result.deletedAt)
         return {
           success: false,
-          message: "User is already banned.",
+          message: "User is already deleted.",
+          user: result,
         };
 
-      result.isBanned = true;
-      result.updatedAt = Date.now();
-      const saveResult = await result.save();
-      if (!saveResult)
+      const deleteResult = await User.destroy({ where: { username } });
+      if (!deleteResult)
         return {
           success: false,
-          message: "Couldn't ban this user. Please try again later.",
+          message: "Couldn't delete this user. Please try again later.",
         };
 
       return {
         success: true,
-        message: "User has been banned successfully.",
+        message: "User has been deleted successfully.",
         user: result,
       };
     } catch (error) {
-      logger.error(`Error banning user service - ${error}`);
+      logger.error(`Error deleting user service - ${error}`);
       return {
         success: false,
         message: "Internal server error.",
@@ -59,4 +61,4 @@ class BanUserService {
   }
 }
 
-export default BanUserService;
+export default DeleteUserService;

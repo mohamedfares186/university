@@ -4,10 +4,7 @@ import bcrypt from "bcryptjs";
 import Tokens from "../../../utils/tokens.js";
 import sendEmail from "../../../utils/email.js";
 import environment from "../../../config/env.js";
-import type {
-  UserCredentials,
-  RegisterCredentials,
-} from "../../../types/credentials.js";
+import type { RegisterCredentials } from "../../../types/credentials.js";
 import User from "../../users/models/users.js";
 
 const { secureTokenSecret, frontendUrl } = environment;
@@ -15,7 +12,7 @@ const { secureTokenSecret, frontendUrl } = environment;
 interface RegisterResult {
   success: boolean;
   message: string;
-  user?: UserCredentials;
+  user?: User;
   emailSent?: boolean;
 }
 
