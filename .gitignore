@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+
+.vscode/
+
+.env*
+
+database/
+*.sqlite*
+*.db
+
+logs/
+*.log
