@@ -2,18 +2,10 @@ import { Op } from "sequelize";
 import { logger } from "../../../middleware/logger.js";
 import type {
   PageQuery,
-  PaginationInfo,
-} from "../../../types/miscellaneous.js";
+  BaseReturnResult,
+} from "../../base/BaseReturnResult.js";
 import BaseGetService from "../../base/BaseGetService.js";
 import User from "../models/users.js";
-
-interface GetUserResult {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data?: User[] | User;
-  pages?: PaginationInfo;
-}
 
 class GetUserService extends BaseGetService<User> {
   constructor() {
@@ -23,16 +15,23 @@ class GetUserService extends BaseGetService<User> {
   async getAllUsers(
     pageQuery: PageQuery,
     isAdmin: boolean = false
-  ): Promise<GetUserResult> {
+  ): Promise<BaseReturnResult<User>> {
     const result = await this.getAll(pageQuery, isAdmin);
     return {
       ...result,
     };
   }
 
-  async getByUsernameOrEmailOrIdOrPhoneNumber(
+  async getUserById(id: string): Promise<BaseReturnResult<User>> {
+    const result = await this.getById(id, true);
+    return {
+      ...result,
+    };
+  }
+
+  async getUserByUsernameOrEmailOrIdOrPhoneNumber(
     identifier: string
-  ): Promise<GetUserResult> {
+  ): Promise<BaseReturnResult<User>> {
     try {
       const result = await this.model.findOne({
         where: {

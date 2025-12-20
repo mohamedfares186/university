@@ -2,23 +2,15 @@ import BaseGetService from "../../base/BaseGetService.js";
 import Course from "../models/coursesModel.js";
 import type {
   PageQuery,
-  PaginationInfo,
-} from "../../../types/miscellaneous.js";
-
-interface CourseQueryResult {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data?: Course[];
-  pages?: PaginationInfo;
-}
+  BaseReturnResult,
+} from "../../base/BaseReturnResult.js";
 
 class GetCourseService extends BaseGetService<Course> {
   constructor() {
     super(Course, "Course");
   }
 
-  async getCourses(pageQuery: PageQuery): Promise<CourseQueryResult> {
+  async getCourses(pageQuery: PageQuery): Promise<BaseReturnResult<Course>> {
     const result = await this.getAll(pageQuery, false);
     return {
       ...result,
@@ -28,7 +20,7 @@ class GetCourseService extends BaseGetService<Course> {
     title: string,
     isAdmin: boolean = false,
     pageQuery?: PageQuery
-  ): Promise<CourseQueryResult> {
+  ): Promise<BaseReturnResult<Course>> {
     const result = await this.search(
       title,
       { searchFields: ["title", "description"], includeTimestamps: isAdmin },

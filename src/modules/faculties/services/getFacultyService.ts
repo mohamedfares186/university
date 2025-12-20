@@ -3,16 +3,8 @@ import BaseGetService from "../../base/BaseGetService.js";
 import Faculty from "../models/facultiesModel.js";
 import type {
   PageQuery,
-  PaginationInfo,
-} from "../../../types/miscellaneous.js";
-interface FacultyQueryResult {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data?: Faculty[] | Faculty;
-  pages?: PaginationInfo;
-}
-
+  BaseReturnResult,
+} from "../../base/BaseReturnResult.js";
 class GetFacultyService extends BaseGetService<Faculty> {
   constructor() {
     super(Faculty, "Faculty");
@@ -21,7 +13,7 @@ class GetFacultyService extends BaseGetService<Faculty> {
   async getFacultyById(
     facultyId: string,
     isAdmin: boolean
-  ): Promise<FacultyQueryResult> {
+  ): Promise<BaseReturnResult<Faculty>> {
     const result = await this.getById(facultyId, isAdmin);
     return {
       ...result,
@@ -31,7 +23,7 @@ class GetFacultyService extends BaseGetService<Faculty> {
   async getAllFaculties(
     pageQuery: PageQuery,
     isAdmin: boolean = false
-  ): Promise<FacultyQueryResult> {
+  ): Promise<BaseReturnResult<Faculty>> {
     const result = await this.getAll(pageQuery, isAdmin);
     return {
       ...result,
@@ -42,7 +34,7 @@ class GetFacultyService extends BaseGetService<Faculty> {
     title: string,
     isAdmin: boolean = false,
     pageQuery?: PageQuery
-  ): Promise<FacultyQueryResult> {
+  ): Promise<BaseReturnResult<Faculty>> {
     const result = await this.search(
       title,
       { searchFields: ["title", "description"], includeTimestamps: isAdmin },

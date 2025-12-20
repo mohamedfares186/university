@@ -44,6 +44,13 @@ class GetFacultyController {
         true
       );
 
+      if (!result.success) {
+        return res.status(result.statusCode).json({
+          success: result.success,
+          message: result.message,
+        });
+      }
+
       return res.status(result.statusCode).json({
         success: result.success,
         message: result.message,
@@ -81,7 +88,18 @@ class GetFacultyController {
         pageQuery
       );
 
-      return res.status(result.statusCode).json(result);
+      if (!result.success) {
+        return res.status(result.statusCode).json({
+          success: result.success,
+          message: result.message,
+        });
+      }
+
+      return res.status(result.statusCode).json({
+        success: result.success,
+        message: result.message,
+        data: result.data,
+      });
     } catch (error) {
       logger.error(`Error in searching faculties controller - ${error}`);
       return res.status(500).json({
@@ -109,6 +127,14 @@ class GetFacultyController {
         facultyId,
         true
       );
+
+      if (!result.success) {
+        return res.status(result.statusCode).json({
+          success: result.success,
+          message: result.message,
+        });
+      }
+
       return res.status(result.statusCode).json({
         success: result.success,
         message: result.message,

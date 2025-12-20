@@ -25,10 +25,32 @@ class CreateuserController {
         isBanned,
       } = req.body;
 
-      if (password !== repeatPassword)
+      if (
+        !firstName ||
+        !lastName ||
+        !email ||
+        !username ||
+        !password ||
+        !repeatPassword ||
+        !phoneNumber ||
+        !address ||
+        !gender ||
+        !dateOfBirth ||
+        !role ||
+        isVerified === undefined ||
+        isApproved === undefined ||
+        isBanned === undefined
+      ) {
+        return res
+          .status(400)
+          .json({ success: false, message: "All feilds are required" });
+      }
+
+      if (password !== repeatPassword) {
         return res
           .status(400)
           .json({ success: false, message: "Passwords don't match." });
+      }
 
       const result = await this.createUserService.createUser({
         firstName,
@@ -46,10 +68,11 @@ class CreateuserController {
         isBanned,
       });
 
-      if (!result.success)
+      if (!result.success) {
         return res
           .status(result.statusCode)
           .json({ success: result.success, message: result.message });
+      }
 
       return res.status(result.statusCode).json({
         success: result.success,

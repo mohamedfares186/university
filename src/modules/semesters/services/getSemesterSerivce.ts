@@ -3,16 +3,8 @@ import BaseGetService from "../../base/BaseGetService.js";
 
 import type {
   PageQuery,
-  PaginationInfo,
-} from "../../../types/miscellaneous.js";
-
-interface GetSemesterResult {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data?: Semester[] | Semester;
-  pages?: PaginationInfo;
-}
+  BaseReturnResult,
+} from "../../base/BaseReturnResult.js";
 
 class GetSemesterService extends BaseGetService<Semester> {
   constructor() {
@@ -21,7 +13,7 @@ class GetSemesterService extends BaseGetService<Semester> {
   async getSemesterById(
     id: string,
     isAdmin: boolean = false
-  ): Promise<GetSemesterResult> {
+  ): Promise<BaseReturnResult<Semester>> {
     const result = await this.getById(id, isAdmin);
     return {
       ...result,
@@ -31,7 +23,7 @@ class GetSemesterService extends BaseGetService<Semester> {
   async getAllSemesters(
     pageQuery: PageQuery,
     isAdmin: boolean = false
-  ): Promise<GetSemesterResult> {
+  ): Promise<BaseReturnResult<Semester>> {
     const result = await this.getAll(pageQuery, isAdmin);
     return {
       ...result,
@@ -42,7 +34,7 @@ class GetSemesterService extends BaseGetService<Semester> {
     title: string,
     isAdmin: boolean = false,
     pageQuery?: PageQuery
-  ): Promise<GetSemesterResult> {
+  ): Promise<BaseReturnResult<Semester>> {
     const result = await this.search(
       title,
       { searchFields: ["title"], includeTimestamps: isAdmin },
@@ -56,7 +48,7 @@ class GetSemesterService extends BaseGetService<Semester> {
   async adminGetAllSemesters(
     pageQuery: PageQuery,
     isAdmin: boolean = false
-  ): Promise<GetSemesterResult> {
+  ): Promise<BaseReturnResult<Semester>> {
     const result = await this.getAll(pageQuery, isAdmin);
     return {
       ...result,
@@ -67,7 +59,7 @@ class GetSemesterService extends BaseGetService<Semester> {
     title: string,
     isAdmin: boolean = false,
     pageQuery?: PageQuery
-  ): Promise<GetSemesterResult> {
+  ): Promise<BaseReturnResult<Semester>> {
     const result = await this.search(
       title,
       { searchFields: ["title"], includeTimestamps: isAdmin },

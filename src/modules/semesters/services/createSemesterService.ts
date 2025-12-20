@@ -1,12 +1,6 @@
 import Semester from "../models/semestersModel.js";
 import BaseCreateService from "../../base/BaseCreateService.js";
-
-interface CreateSemesterResult {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  semester?: Semester;
-}
+import type { BaseReturnResult } from "../../base/BaseReturnResult.js";
 
 interface ISemester {
   title: string;
@@ -20,7 +14,7 @@ class CreateSemesterSerivce extends BaseCreateService<Semester> {
     super(Semester, "Semester");
   }
 
-  async createSemester(data: ISemester): Promise<CreateSemesterResult> {
+  async createSemester(data: ISemester): Promise<BaseReturnResult<Semester>> {
     return this.create(
       data,
       {

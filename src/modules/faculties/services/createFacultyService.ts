@@ -1,11 +1,6 @@
 import Faculty from "../models/facultiesModel.js";
 import BaseCreateService from "../../base/BaseCreateService.js";
-
-interface CreateFacultyResult {
-  success: boolean;
-  message: string;
-  faculty?: Faculty;
-}
+import type { BaseReturnResult } from "../../base/BaseReturnResult.js";
 
 interface IFaculty {
   title: string;
@@ -17,7 +12,7 @@ class CreateFacultyController extends BaseCreateService<Faculty> {
     super(Faculty, "Faculty");
   }
 
-  async createFaculty(data: IFaculty): Promise<CreateFacultyResult> {
+  async createFaculty(data: IFaculty): Promise<BaseReturnResult<Faculty>> {
     return this.create(
       data,
       {

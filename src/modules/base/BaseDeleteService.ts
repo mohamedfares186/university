@@ -1,11 +1,6 @@
 import { Model, type ModelStatic, type WhereOptions } from "sequelize";
 import { logger } from "../../middleware/logger.js";
-
-interface DeleteResult {
-  statusCode: number;
-  success: boolean;
-  message: string;
-}
+import type { BaseReturnResult } from "./BaseReturnResult.js";
 
 abstract class BaseDeleteService<T extends Model> {
   protected model: ModelStatic<T>;
@@ -21,7 +16,7 @@ abstract class BaseDeleteService<T extends Model> {
   /**
    * Soft delete a record (if your model supports paranoid mode)
    */
-  async softDelete(id: string): Promise<DeleteResult> {
+  async softDelete(id: string): Promise<BaseReturnResult<T>> {
     try {
       const record = await this.model.findOne({
         where: { [this.idField]: id } as WhereOptions<T>,
@@ -57,7 +52,7 @@ abstract class BaseDeleteService<T extends Model> {
   /**
    * Hard delete a record (permanent)
    */
-  async hardDelete(id: string): Promise<DeleteResult> {
+  async hardDelete(id: string): Promise<BaseReturnResult<T>> {
     try {
       const deleted = await this.model.destroy({
         where: { [this.idField]: id } as WhereOptions<T>,
@@ -92,7 +87,7 @@ abstract class BaseDeleteService<T extends Model> {
   /**
    * Bulk soft delete
    */
-  async bulkSoftDelete(ids: string[]): Promise<DeleteResult> {
+  async bulkSoftDelete(ids: string[]): Promise<BaseReturnResult<T>> {
     try {
       const deleted = await this.model.destroy({
         where: {

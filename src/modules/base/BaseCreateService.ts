@@ -3,13 +3,7 @@ import { Model, Op, type ModelStatic } from "sequelize";
 import sanitizeHtml from "sanitize-html";
 import { v4 as uuidv4 } from "uuid";
 import { logger } from "../../middleware/logger.js";
-
-interface CreateResult<T> {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data?: T;
-}
+import type { BaseReturnResult } from "./BaseReturnResult.js";
 
 interface SanitizationConfig {
   [key: string]: {
@@ -74,7 +68,7 @@ abstract class BaseCreateService<T extends Model> {
     data: any,
     sanitizationConfig: SanitizationConfig,
     uniqueField?: any
-  ): Promise<CreateResult<T>> {
+  ): Promise<BaseReturnResult<T>> {
     try {
       // Sanitize input
       const sanitizedData = this.sanitizeData(data, sanitizationConfig);
@@ -132,7 +126,7 @@ abstract class BaseCreateService<T extends Model> {
   async bulkCreate(
     dataArray: any[],
     sanitizationConfig: SanitizationConfig
-  ): Promise<CreateResult<T>> {
+  ): Promise<BaseReturnResult<T>> {
     try {
       const sanitizedDataArray = dataArray.map((data) => {
         const sanitized = this.sanitizeData(data, sanitizationConfig);

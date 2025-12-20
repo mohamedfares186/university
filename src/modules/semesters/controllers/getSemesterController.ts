@@ -19,6 +19,12 @@ class GetSemesterController {
         false
       );
 
+      if (!result.success) {
+        return res
+          .status(result.statusCode)
+          .json({ success: result.success, message: result.message });
+      }
+
       return res.status(result.statusCode).json({
         success: result.success,
         message: result.message,
@@ -53,6 +59,12 @@ class GetSemesterController {
         pageQuery
       );
 
+      if (!result.success) {
+        return res
+          .status(result.statusCode)
+          .json({ success: result.success, message: result.message });
+      }
+
       return res.status(result.statusCode).json({
         success: result.success,
         message: result.message,
@@ -82,6 +94,12 @@ class GetSemesterController {
         false
       );
 
+      if (!result.success) {
+        return res
+          .status(result.statusCode)
+          .json({ success: result.success, message: result.message });
+      }
+
       return res.status(result.statusCode).json({
         success: result.success,
         message: result.message,
@@ -107,6 +125,12 @@ class GetSemesterController {
         { pageNumber, limit },
         true
       );
+
+      if (!result.success) {
+        return res
+          .status(result.statusCode)
+          .json({ success: result.success, message: result.message });
+      }
 
       return res.status(result.statusCode).json({
         success: result.success,
@@ -147,7 +171,17 @@ class GetSemesterController {
         pageQuery
       );
 
-      return res.status(result.statusCode).json(result);
+      if (!result.success) {
+        return res
+          .status(result.statusCode)
+          .json({ success: result.success, message: result.message });
+      }
+
+      return res.status(result.statusCode).json({
+        success: result.success,
+        message: result.message,
+        data: result.data,
+      });
     } catch (error) {
       logger.error(`Error in admin searching semesters controller - ${error}`);
       return res.status(500).json({

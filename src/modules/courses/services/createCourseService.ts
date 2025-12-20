@@ -1,12 +1,6 @@
+import type { BaseReturnResult } from "../../base/BaseReturnResult.js";
 import BaseCreateService from "../../base/BaseCreateService.js";
 import Course from "../models/coursesModel.js";
-
-interface CreateCourseResult {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data?: Course;
-}
 
 interface ICourse {
   title: string;
@@ -19,8 +13,8 @@ class CreateCourseService extends BaseCreateService<Course> {
     super(Course, "Course");
   }
 
-  async createCourse(course: ICourse): Promise<CreateCourseResult> {
-    return await this.create(
+  async createCourse(course: ICourse): Promise<BaseReturnResult<Course>> {
+    const result = await this.create(
       course,
       {
         title: { sanitize: true },
@@ -28,6 +22,9 @@ class CreateCourseService extends BaseCreateService<Course> {
       },
       "title"
     );
+    return {
+      ...result,
+    };
   }
 }
 

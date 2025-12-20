@@ -1,16 +1,10 @@
 import { Op } from "sequelize";
 import { logger } from "../../../middleware/logger.js";
 import User from "../models/users.js";
-
-interface DeleteUserResult {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  user?: User;
-}
+import type { BaseReturnResult } from "../../base/BaseReturnResult.js";
 
 class DeleteUserService {
-  async softDelete(identifier: string): Promise<DeleteUserResult> {
+  async softDelete(identifier: string): Promise<BaseReturnResult<User>> {
     try {
       const result = await User.findOne({
         where: {
@@ -45,7 +39,7 @@ class DeleteUserService {
           statusCode: 400,
           success: false,
           message: "User is already deleted.",
-          user: result,
+          data: result,
         };
       }
 
@@ -72,7 +66,7 @@ class DeleteUserService {
         statusCode: 200,
         success: true,
         message: "User has been deleted successfully.",
-        user: result,
+        data: result,
       };
     } catch (error) {
       logger.error(`Error deleting user service - ${error}`);

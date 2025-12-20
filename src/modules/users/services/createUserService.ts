@@ -2,13 +2,7 @@ import type { CreateUserCredentials } from "../../../types/credentials.js";
 import User from "../models/users.js";
 import { logger } from "../../../middleware/logger.js";
 import BaseCreateService from "../../base/BaseCreateService.js";
-
-export interface CreateUserResult {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data?: User | undefined;
-}
+import type { BaseReturnResult } from "../../base/BaseReturnResult.js";
 
 class CreateUserSerivce extends BaseCreateService<User> {
   constructor() {
@@ -16,7 +10,7 @@ class CreateUserSerivce extends BaseCreateService<User> {
   }
   async createUser(
     userCredentials: CreateUserCredentials
-  ): Promise<CreateUserResult> {
+  ): Promise<BaseReturnResult<User>> {
     try {
       const result = await this.create(
         userCredentials,
@@ -45,10 +39,7 @@ class CreateUserSerivce extends BaseCreateService<User> {
       }
 
       return {
-        statusCode: result.statusCode,
-        success: result.success,
-        message: result.message,
-        data: result.data,
+        ...result,
       };
     } catch (error) {
       logger.error(`Error creating new user service - ${error}`);

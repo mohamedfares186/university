@@ -6,23 +6,8 @@ import {
   Op,
 } from "sequelize";
 import { logger } from "../../middleware/logger.js";
-import type { PaginationInfo, PageQuery } from "../../types/miscellaneous.js";
+import type { PageQuery, BaseReturnResult } from "./BaseReturnResult.js";
 import sanitizeHtml from "sanitize-html";
-
-interface BaseQueryResult<T> {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data?: T[];
-  pages?: PaginationInfo;
-}
-
-interface SingleRecordResult<T> {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data?: T;
-}
 
 interface SearchOptions {
   searchFields: string[];
@@ -44,7 +29,7 @@ abstract class BaseGetService<T extends Model> {
   async getById(
     id: string,
     includeTimestamps: boolean
-  ): Promise<SingleRecordResult<T>> {
+  ): Promise<BaseReturnResult<T>> {
     try {
       const queryOptions: any = {
         where: { [`${this.modelName.toLowerCase()}Id`]: id },
@@ -88,7 +73,7 @@ abstract class BaseGetService<T extends Model> {
   async getAll(
     pageQuery: PageQuery,
     includeTimestamps: boolean
-  ): Promise<BaseQueryResult<T>> {
+  ): Promise<BaseReturnResult<T>> {
     try {
       const { limit, pageNumber } = pageQuery;
 
@@ -161,7 +146,7 @@ abstract class BaseGetService<T extends Model> {
     searchTerm: string,
     options: SearchOptions,
     pageQuery?: PageQuery
-  ): Promise<BaseQueryResult<T>> {
+  ): Promise<BaseReturnResult<T>> {
     try {
       const sanitizedSearchTerm = sanitizeHtml(searchTerm.trim(), {
         allowedTags: [],
@@ -216,7 +201,7 @@ abstract class BaseGetService<T extends Model> {
         };
       }
 
-      const response: BaseQueryResult<T> = {
+      const response: BaseReturnResult<T> = {
         statusCode: 200,
         success: true,
         message: `${this.modelName}${count > 1 ? "s" : ""} found`,

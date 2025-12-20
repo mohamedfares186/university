@@ -16,6 +16,12 @@ class CreateCourseController {
         creditHours,
       });
 
+      if (!result.success) {
+        return res
+          .status(result.statusCode)
+          .json({ success: result.success, message: result.message });
+      }
+
       return res.status(result.statusCode).json({
         success: result.success,
         message: result.message,

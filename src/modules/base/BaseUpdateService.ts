@@ -2,13 +2,7 @@
 import { Model, type ModelStatic, type WhereOptions } from "sequelize";
 import sanitizeHtml from "sanitize-html";
 import { logger } from "../../middleware/logger.js";
-
-interface UpdateResult<T> {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data?: T;
-}
+import type { BaseReturnResult } from "./BaseReturnResult.js";
 
 interface SanitizationConfig {
   [key: string]: {
@@ -56,7 +50,7 @@ abstract class BaseUpdateService<T extends Model> {
     id: string,
     data: any,
     sanitizationConfig: SanitizationConfig
-  ): Promise<UpdateResult<T>> {
+  ): Promise<BaseReturnResult<T>> {
     try {
       // Find existing record
       const existingRecord = await this.model.findOne({
@@ -107,7 +101,7 @@ abstract class BaseUpdateService<T extends Model> {
     id: string,
     data: Partial<any>,
     sanitizationConfig: SanitizationConfig
-  ): Promise<UpdateResult<T>> {
+  ): Promise<BaseReturnResult<T>> {
     return this.update(id, data, sanitizationConfig);
   }
 }

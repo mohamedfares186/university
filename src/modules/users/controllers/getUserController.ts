@@ -18,11 +18,13 @@ class GetUserController {
         },
         true
       );
+
       if (!result.success) {
         return res
           .status(result.statusCode)
           .json({ success: result.success, message: result.message });
       }
+
       return res.status(result.statusCode).json({
         success: result.success,
         message: result.message,
@@ -37,16 +39,44 @@ class GetUserController {
     }
   };
 
+  getUserById = async (req: UserRequest, res: Response): Promise<Response> => {
+    try {
+      const userId = req.params.userId;
+      if (!userId) {
+        return res
+          .status(400)
+          .json({ success: false, message: "User ID is required." });
+      }
+
+      const result = await this.getUserService.getUserById(userId);
+
+      if (!result.success) {
+        return res.status(result.statusCode).json({
+          success: result.success,
+          message: result.message,
+        });
+      }
+
+      return res.status(result.statusCode).json({
+        success: result.success,
+        message: result.message,
+        data: result.data,
+      });
+    } catch (error) {
+      logger.error(`Error getting user by Id controller - ${error}`);
+      return res
+        .status(500)
+        .json({ success: false, message: "Internal server error." });
+    }
+  };
+
   getUserbyUsernameOrEmailOrId = async (
     req: UserRequest,
     res: Response
   ): Promise<Response> => {
     try {
       const identifier =
-        req.query.username ||
-        req.query.email ||
-        req.query.userId ||
-        req.query["phone-number"];
+        req.query.username || req.query.email || req.query["phone-number"];
 
       if (!identifier) {
         return res.status(400).json({
@@ -56,7 +86,7 @@ class GetUserController {
       }
 
       const result =
-        await this.getUserService.getByUsernameOrEmailOrIdOrPhoneNumber(
+        await this.getUserService.getUserByUsernameOrEmailOrIdOrPhoneNumber(
           identifier as string
         );
 

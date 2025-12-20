@@ -17,10 +17,16 @@ class GetCourseController {
         limit,
       });
 
+      if (!result.success) {
+        return res
+          .status(result.statusCode)
+          .json({ success: result.success, message: result.message });
+      }
+
       return res.status(result.statusCode).json({
         success: result.success,
         message: result.message,
-        course: result.data,
+        data: result.data,
         pages: result.pages,
       });
     } catch (error) {
@@ -51,10 +57,16 @@ class GetCourseController {
         pageQuery
       );
 
+      if (!result.success) {
+        return res
+          .status(result.statusCode)
+          .json({ success: result.success, message: result.message });
+      }
+
       return res.status(result.statusCode).json({
         success: result.success,
         message: result.message,
-        course: result.data,
+        data: result.data,
       });
     } catch (error) {
       logger.error(`Error searching courses controller - ${error}`);

@@ -11,10 +11,7 @@ class DeleteUserController {
   softDelete = async (req: UserRequest, res: Response): Promise<Response> => {
     try {
       const identifier =
-        req.query.userId ||
-        req.query.email ||
-        req.query.username ||
-        req.query.phoneNumber;
+        req.query.email || req.query.username || req.query["phone-number"];
 
       if (!identifier)
         return res
@@ -24,15 +21,17 @@ class DeleteUserController {
       const result = await this.deleteUserService.softDelete(
         identifier as string
       );
-      if (!result.success)
+
+      if (!result.success) {
         return res
           .status(result.statusCode)
           .json({ success: result.success, message: result.message });
+      }
 
       return res.status(result.statusCode).json({
         success: result.success,
         message: result.message,
-        user: result.user,
+        data: result.data,
       });
     } catch (error) {
       logger.error(`Error deleting user controller - ${error}`);
