@@ -7,36 +7,41 @@ import GetFacultyController from "../controllers/getFacultyController.js";
 import requestLogger from "../../../middleware/logger.js";
 
 const router = Router();
+
+const createFacultyController = new CreateFacultyController();
 const getFacultyController = new GetFacultyController();
 
-router.get("/q", requestLogger, getFacultyController.searchFaculties);
-router.get("/pages", requestLogger, getFacultyController.getAllFaculties);
+router.get(
+  "/q",
+  authenticate,
+  validateCsrfToken,
+  requestLogger,
+  getFacultyController.searchFaculties
+);
+router.get(
+  "/pages",
+  authenticate,
+  validateCsrfToken,
+  requestLogger,
+  getFacultyController.getAllFaculties
+);
 
 router.post(
-  "/create-faculty",
+  "/admin/create-faculty",
   authenticate,
   validateCsrfToken,
   authorize("super_admin"),
   requestLogger,
-  new CreateFacultyController().createFaculty
+  createFacultyController.createFaculty
 );
 
 router.get(
-  "/admin/pages",
+  "/:facultyId",
   authenticate,
   validateCsrfToken,
   authorize("super_admin", "admin"),
   requestLogger,
-  getFacultyController.adminGetAllFaculties
-);
-
-router.get(
-  "/admin/:facultyId",
-  authenticate,
-  validateCsrfToken,
-  authorize("super_admin", "admin"),
-  requestLogger,
-  getFacultyController.adminGetFacultyById
+  getFacultyController.getFacultyById
 );
 
 export default router;

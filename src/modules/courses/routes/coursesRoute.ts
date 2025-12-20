@@ -8,18 +8,27 @@ import requestLogger from "../../../middleware/logger.js";
 
 const router = Router();
 
+const createCourseController = new CreateCourseController();
 const getCourseController = new GetCourseController();
 
 router.get("/q", requestLogger, getCourseController.searchCourses);
 router.get("/pages", requestLogger, getCourseController.getCourses);
 
 router.post(
-  "/create-course",
+  "/admin/create-course",
   authenticate,
   validateCsrfToken,
   authorize("super_admin"),
   requestLogger,
-  new CreateCourseController().createCourse
+  createCourseController.createCourse
+);
+
+router.get(
+  "/:courseId",
+  authenticate,
+  validateCsrfToken,
+  authorize("super_admin", "admin"),
+  getCourseController.getCourseById
 );
 
 export default router;

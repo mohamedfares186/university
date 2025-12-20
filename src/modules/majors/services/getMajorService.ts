@@ -1,29 +1,30 @@
 import BaseGetService from "../../base/BaseGetService.js";
-import Course from "../models/coursesModel.js";
 import type {
-  PageQuery,
   BaseReturnResult,
+  PageQuery,
 } from "../../base/BaseReturnResult.js";
+import Major from "../models/majorsModel.js";
 
-class GetCourseService extends BaseGetService<Course> {
+class GetMajorService extends BaseGetService<Major> {
   constructor() {
-    super(Course, "Course");
+    super(Major, "Major");
   }
 
-  async getCourses(
+  async getAllMajors(
     pageQuery: PageQuery,
     isAdmin: boolean = false
-  ): Promise<BaseReturnResult<Course>> {
+  ): Promise<BaseReturnResult<Major>> {
     const result = await this.getAll(pageQuery, isAdmin);
     return {
       ...result,
     };
   }
-  async searchCourses(
+
+  async searchMajors(
     title: string,
     isAdmin: boolean = false,
     pageQuery?: PageQuery
-  ): Promise<BaseReturnResult<Course>> {
+  ): Promise<BaseReturnResult<Major>> {
     const result = await this.search(
       title,
       { searchFields: ["title", "description"], includeTimestamps: isAdmin },
@@ -34,10 +35,10 @@ class GetCourseService extends BaseGetService<Course> {
     };
   }
 
-  async getCourseById(
+  async getMajorById(
     id: string,
     isAdmin: boolean = false
-  ): Promise<BaseReturnResult<Course>> {
+  ): Promise<BaseReturnResult<Major>> {
     const result = await this.getById(id, isAdmin);
     return {
       ...result,
@@ -45,4 +46,4 @@ class GetCourseService extends BaseGetService<Course> {
   }
 }
 
-export default GetCourseService;
+export default GetMajorService;

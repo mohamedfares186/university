@@ -54,21 +54,6 @@ class GetSemesterService extends BaseGetService<Semester> {
       ...result,
     };
   }
-
-  async adminSearchSemesters(
-    title: string,
-    isAdmin: boolean = false,
-    pageQuery?: PageQuery
-  ): Promise<BaseReturnResult<Semester>> {
-    const result = await this.search(
-      title,
-      { searchFields: ["title"], includeTimestamps: isAdmin },
-      pageQuery
-    );
-    return {
-      ...result,
-    };
-  }
 }
 
 export default GetSemesterService;

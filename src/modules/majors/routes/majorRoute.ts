@@ -1,47 +1,48 @@
 import { Router } from "express";
-import CreateSemesterController from "../controllers/createSemesterController.js";
 import authenticate from "../../../middleware/isAuthenticated.js";
 import { validateCsrfToken } from "../../../middleware/csrf.js";
 import authorize from "../../../middleware/isAuthorized.js";
-import GetSemesterController from "../controllers/getSemesterController.js";
 import requestLogger from "../../../middleware/logger.js";
+
+import CreateMajorController from "../controllers/createMajorController.js";
+import GetMajorController from "../controllers/getMajorController.js";
 
 const router = Router();
 
-const createSemesterController = new CreateSemesterController();
-const getSemesterController = new GetSemesterController();
+const createMajorController = new CreateMajorController();
+const getMajorController = new GetMajorController();
 
 router.get(
-  "/q",
+  "/search/q",
   authenticate,
   validateCsrfToken,
   requestLogger,
-  getSemesterController.searchSemesters
+  getMajorController.searchMajors
 );
 router.get(
   "/pages",
   authenticate,
   validateCsrfToken,
   requestLogger,
-  getSemesterController.getAllSemesters
+  getMajorController.getAllMajors
 );
 
 router.post(
-  "/admin/create-semester",
+  "/admin/create-major",
   authenticate,
   validateCsrfToken,
   authorize("super_admin"),
   requestLogger,
-  createSemesterController.createSemester
+  createMajorController.createMajor
 );
 
 router.get(
-  "/:semesterId",
+  "/:majorId",
   authenticate,
   validateCsrfToken,
-  authorize("super_admin", "admin"),
+  authorize("super_admin"),
   requestLogger,
-  getSemesterController.getSemesterById
+  getMajorController.getMajorById
 );
 
 export default router;

@@ -13,7 +13,8 @@ import authRoute from "./modules/auth/routes/authRoute.js";
 import usersRoute from "./modules/users/routes/usersRoute.js";
 import facultiesRoute from "./modules/faculties/routes/facultyRoute.js";
 import coursesRoute from "./modules/courses/routes/coursesRoute.js";
-import semesterRouter from "./modules/semesters/routes/semesterRoute.js";
+import semesterRoute from "./modules/semesters/routes/semesterRoute.js";
+import majorRoute from "./modules/majors/routes/majorRoute.js";
 
 const app = express();
 
@@ -29,7 +30,8 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", usersRoute);
 app.use("/api/v1/faculties", facultiesRoute);
 app.use("/api/v1/courses", coursesRoute);
-app.use("/api/v1/semesters", semesterRouter);
+app.use("/api/v1/semesters", semesterRoute);
+app.use("/api/v1/majors", majorRoute);
 
 app.use(error as ErrorRequestHandler);
 
