@@ -44,14 +44,6 @@ Student.init(
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
     },
-    gpa: {
-      type: DataTypes.FLOAT,
-      allowNull: true,
-    },
-    semester: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
   },
   {
     tableName: "students",

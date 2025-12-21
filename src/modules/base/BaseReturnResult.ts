@@ -12,10 +12,17 @@ export interface PaginationInfo {
   hasPrevPage: boolean;
 }
 
-export interface BaseReturnResult<Model> {
+export interface StandardReturn {
   statusCode: number;
   success: boolean;
   message: string;
+}
+
+export interface SingleReturnResult<Model> extends StandardReturn {
+  data?: Model;
+}
+
+export interface BaseReturnResult<Model> extends StandardReturn {
   data?: Model | Model[];
   pages?: PaginationInfo;
 }

@@ -43,7 +43,7 @@ router.get(
   validateCsrfToken,
   authorize("super_admin", "admin"),
   requestLogger,
-  getUserController.getUserbyUsernameOrEmailOrId
+  getUserController.getUserByUsernameOrEmailOrOrPhoneNumber
 );
 
 router.get(
@@ -53,6 +53,14 @@ router.get(
   authorize("super_admin", "admin"),
   requestLogger,
   getUserController.getUserById
+);
+router.get(
+  "/admin/q",
+  authenticate,
+  validateCsrfToken,
+  authorize("super_admin", "admin"),
+  requestLogger,
+  getUserController.getUserByRole
 );
 
 router.delete(

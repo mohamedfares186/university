@@ -6,7 +6,7 @@ const { DataTypes } = require("sequelize");
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("professors", {
-      professorI_id: {
+      professor_id: {
         type: DataTypes.UUID,
         primaryKey: true,
         unique: true,

@@ -1,4 +1,4 @@
-import type { Response } from "express";
+import type { Request, Response } from "express";
 import type { UserRequest } from "../../../types/request.js";
 import GetUserService from "../services/getUserService.js";
 import { logger } from "../../../middleware/logger.js";
@@ -70,7 +70,7 @@ class GetUserController {
     }
   };
 
-  getUserbyUsernameOrEmailOrId = async (
+  getUserByUsernameOrEmailOrOrPhoneNumber = async (
     req: UserRequest,
     res: Response
   ): Promise<Response> => {
@@ -86,7 +86,7 @@ class GetUserController {
       }
 
       const result =
-        await this.getUserService.getUserByUsernameOrEmailOrIdOrPhoneNumber(
+        await this.getUserService.getUserByUsernameOrEmailOrOrPhoneNumber(
           identifier as string
         );
 
@@ -105,6 +105,45 @@ class GetUserController {
       logger.error(
         `Error getting user by username or email or user ID or phone number - ${error}`
       );
+      return res
+        .status(500)
+        .json({ success: false, message: "Internal server error." });
+    }
+  };
+
+  getUserByRole = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const { role } = req.query;
+      if (!role) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Role is required" });
+      }
+
+      const pageNumber = Number(req.query.page) || 1;
+      const limit = Number(req.query.limit) || 10;
+
+      const result = await this.getUserService.getUserByRole(role as string, {
+        pageNumber,
+        limit,
+      });
+
+      if (!result.success) {
+        return res
+          .status(result.statusCode)
+          .json({ success: result.success, message: result.message });
+      }
+
+      return res
+        .status(result.statusCode)
+        .json({
+          success: result.success,
+          message: result.message,
+          data: result.data,
+          page: result.pages,
+        });
+    } catch (error) {
+      logger.error(`Error getting users by role controller - ${error}`);
       return res
         .status(500)
         .json({ success: false, message: "Internal server error." });

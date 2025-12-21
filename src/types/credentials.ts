@@ -6,7 +6,7 @@ export interface RegisterCredentials {
   email: string;
   username: string;
   password: string;
-  repeatPassword: string;
+  repeatPassword?: string;
   dateOfBirth: Date;
   phoneNumber: string;
   address: string;
@@ -18,17 +18,8 @@ export interface LoginCredentials {
   password: string;
 }
 
-export interface UserCredentials {
+export interface UserCredentials extends RegisterCredentials {
   userId: UUIDTypes;
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
-  password: string;
-  dateOfBirth: Date;
-  phoneNumber: string;
-  gender: string;
-  address: string;
   isVerified: boolean;
   isBanned: boolean;
   isApproved: boolean;
@@ -44,10 +35,20 @@ export interface AdminUserCredentials {
   email: string;
   username: string;
   password: string;
-  dateOfBirth: Date;
   phoneNumber: string;
   address: string;
   gender: string;
+  dateOfBirth: Date;
+}
+
+export interface CreateUserCredentials extends RegisterCredentials {
+  role: string;
+  majorId?: string;
+  courseId?: string;
+  professorTitle?: string;
+  isVerified: boolean;
+  isApproved: boolean;
+  isBanned: boolean;
 }
 
 export interface ResetPasswordCredentials {
@@ -61,20 +62,4 @@ export interface JWTCredentials {
   isVerified: boolean;
   isBanned: boolean;
   isApproved: boolean;
-}
-
-export interface CreateUserCredentials {
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
-  password: string;
-  dateOfBirth: Date;
-  phoneNumber: string;
-  gender: string;
-  address: string;
-  role: string;
-  isVerified: boolean;
-  isApproved: boolean;
-  isBanned: boolean;
 }
